@@ -5,7 +5,6 @@ import BigBilledIcon from "../assets/svg/big_billed.js";
 import { ROUTES_PATH } from "../constants/routes.js";
 import USERS_TEST from "../constants/usersTest.js";
 import Logout from "./Logout.js";
-//import { logDOM } from "@testing-library/dom";
 
 export const filteredBills = (data, status) => {
   return data && data.length
@@ -101,7 +100,7 @@ export default class {
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0;
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id;
 
-    // Correction du bug d'affichage dans le Dashboard
+    // Correction du bug d'affichage dans le Dashboard (double clic)
     if (e.currentTarget.className.includes("selectCard")) {
       $(".layout").html("");
       $(".layout").html(DashboardUI({ data: { bills } }));
@@ -124,7 +123,7 @@ export default class {
       $(`#open-bill${bill.id}`).addClass("selectCard");
       $(".dashboard-right-container div").html(DashboardFormUI(bill));
       $(".vertical-navbar").css({ height: "150vh" });
-      this.counter + 1; // correction du bug du Dashboard (+1 à la place de ++ ) (on ajoute 1 et non on incrimente à chaque clic)
+      this.counter + 1; // correction du [Bug Hunt] - Dashboard (+1 à la place de ++ ) (on ajoute 1 et non on incrimente à chaque clic)
     }
 
     $("#icon-eye-d").click(this.handleClickIconEye);
